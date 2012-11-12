@@ -20,12 +20,15 @@ package org.apache.scrunch
 import org.apache.crunch.io.{From => from, To => to, At => at}
 import org.apache.crunch.types.avro.AvroType
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.hbase.client.Scan;
 
 trait From {
   def avroFile[T](path: String, atype: AvroType[T]) = from.avroFile(path, atype)
   def avroFile[T](path: Path, atype: AvroType[T]) = from.avroFile(path, atype)
   def textFile(path: String) = from.textFile(path)
   def textFile(path: Path) = from.textFile(path)
+  def hbaseTable(tableName: String) = from.hbaseTable(tableName)
+  def hbaseTable(tableName: String, scan: Scan) = from.hbaseTable(tableName, scan)
 }
 
 object From extends From
